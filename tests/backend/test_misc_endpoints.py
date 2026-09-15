@@ -25,6 +25,16 @@ class TestDemandEndpoints:
             assert "forecasted_demand" in forecast
             assert "trend" in forecast
             assert "period" in forecast
+            assert "unit_cost" in forecast
+
+    def test_demand_forecast_unit_costs(self, client):
+        """Test that every forecast has a positive unit cost for restock pricing."""
+        response = client.get("/api/demand")
+        data = response.json()
+
+        for forecast in data:
+            assert isinstance(forecast["unit_cost"], (int, float))
+            assert forecast["unit_cost"] > 0, f"{forecast['item_sku']} has no unit cost"
 
     def test_demand_forecast_trends(self, client):
         """Test that demand forecasts have valid trend values."""

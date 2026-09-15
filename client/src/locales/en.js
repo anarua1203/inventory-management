@@ -6,8 +6,15 @@ export default {
     orders: 'Orders',
     finance: 'Finance',
     demandForecast: 'Demand Forecast',
+    restocking: 'Restocking',
+    reports: 'Reports',
     companyName: 'Catalyst Components',
-    subtitle: 'Inventory Management System'
+    subtitle: 'Inventory Management System',
+    collapseSidebar: 'Collapse sidebar',
+    expandSidebar: 'Expand sidebar',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    skipToContent: 'Skip to content'
   },
 
   // Dashboard
@@ -112,6 +119,9 @@ export default {
     onTimeDelivery: 'On-Time Delivery',
     itemsCount: '{count} items',
     quantity: 'Qty',
+    submittedOrders: 'Submitted Orders',
+    noSubmittedOrders: 'No restock orders have been submitted yet.',
+    submittedNote: 'Submitted restock orders are not affected by the filters above.',
     table: {
       orderNumber: 'Order Number',
       orderId: 'Order ID',
@@ -125,7 +135,8 @@ export default {
       totalValue: 'Total Value',
       status: 'Status',
       expectedDelivery: 'Expected Delivery',
-      actualDelivery: 'Actual Delivery'
+      actualDelivery: 'Actual Delivery',
+      leadTime: 'Lead Time'
     }
   },
 
@@ -188,6 +199,38 @@ export default {
     }
   },
 
+  // Restocking
+  restocking: {
+    title: 'Restocking',
+    description: 'Generate budget-based restock recommendations and place orders',
+    budget: 'Budget',
+    budgetHint: 'Drag to set a budget, then release to fetch recommendations',
+    recommendedTotal: 'Recommended Total',
+    remainingBudget: 'Remaining Budget',
+    coverage: 'Coverage',
+    recommendations: 'Recommendations',
+    noItemsFit: 'No items fit within this budget. Try increasing it.',
+    partial: 'Partial',
+    warehouse: 'Warehouse',
+    leadTime: 'Lead time: {days} days',
+    leadTimeDays: '{days} days',
+    placeOrder: 'Place Order',
+    placing: 'Placing...',
+    orderPlaced: 'Order {orderNumber} placed',
+    expectedDelivery: 'Expected Delivery',
+    viewOrders: 'View in Orders',
+    orderFailed: 'Failed to place order',
+    table: {
+      sku: 'SKU',
+      itemName: 'Item Name',
+      trend: 'Trend',
+      unitCost: 'Unit Cost',
+      neededQty: 'Needed Qty',
+      recommendedQty: 'Recommended Qty',
+      lineTotal: 'Line Total'
+    }
+  },
+
   // Filters
   filters: {
     timePeriod: 'Time Period',
@@ -206,7 +249,8 @@ export default {
     backordered: 'Backordered',
     inStock: 'In Stock',
     lowStock: 'Low Stock',
-    adequate: 'Adequate'
+    adequate: 'Adequate',
+    submitted: 'Submitted'
   },
 
   // Trends

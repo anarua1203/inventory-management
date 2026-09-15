@@ -48,12 +48,17 @@ npm install && npm run dev
 **Data Flow**: Vue filters → `client/src/api.js` → FastAPI → In-memory filtering → Pydantic validation → Computed properties
 **Reactivity**: Raw data in refs (`allOrders`, `inventoryItems`), derived data in computed properties
 
+## Code Conventions
+- Always document non-obvious logic changes with comments
+
 ## API Endpoints
 - `GET /api/inventory` - Filters: warehouse, category
 - `GET /api/orders` - Filters: warehouse, category, status, month
 - `GET /api/dashboard/summary` - All filters
 - `GET /api/demand`, `/api/backlog` - No filters
 - `GET /api/spending/*` - Summary, monthly, categories, transactions
+- `GET /api/restock/recommendations?budget=` - Greedy budget allocation over demand forecasts (priority: trend, then growth)
+- `GET|POST /api/restock-orders` - Submitted restocking orders (in-memory only, reset on server restart); lead time by warehouse: SF 3d, London 7d, Tokyo 10d
 
 ## Common Issues
 1. Use unique keys in v-for (not `index`) - use `sku`, `month`, etc.

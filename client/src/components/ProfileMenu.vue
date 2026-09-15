@@ -1,7 +1,8 @@
 <template>
-  <div class="profile-menu">
+  <div class="profile-menu" :class="{ compact }">
     <button
       class="profile-button"
+      :aria-label="compact ? currentUser.name : null"
       @click="toggleDropdown"
       @blur="handleBlur"
     >
@@ -21,7 +22,7 @@
       </svg>
     </button>
 
-    <div v-if="isDropdownOpen" class="dropdown-menu">
+    <div v-if="isDropdownOpen" class="dropdown-menu" :class="placementClass">
       <div class="dropdown-header">
         <div class="avatar-large">
           {{ getInitials(currentUser.name) }}
@@ -78,11 +79,29 @@ import { ref, computed } from 'vue'
 import { useAuth } from '../composables/useAuth'
 import { useI18n } from '../composables/useI18n'
 
+const props = defineProps({
+  // 'bottom-end' opens the menu below/right (default); 'top-start' opens
+  // it above/left, used when the menu sits in the sidebar footer
+  placement: {
+    type: String,
+    default: 'bottom-end'
+  },
+  // Compact rendering (avatar only) used in the collapsed sidebar rail
+  compact: {
+    type: Boolean,
+    default: false
+  }
+})
+
 const { currentUser, logout, getInitials } = useAuth()
 const { t } = useI18n()
 
 const isDropdownOpen = ref(false)
 const emit = defineEmits(['show-profile-details', 'show-tasks'])
+
+const placementClass = computed(() => {
+  return props.placement === 'top-start' ? 'placement-top-start' : ''
+})
 
 const pendingTaskCount = computed(() => {
   return currentUser.value.tasks.filter(task => task.status === 'pending').length
@@ -118,24 +137,39 @@ const handleLogout = () => {
 <style scoped>
 .profile-menu {
   position: relative;
+  width: 100%;
 }
 
 .profile-button {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
-  padding: 0.5rem 0.875rem;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: inherit;
 }
 
 .profile-button:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-strong);
+}
+
+/* Compact rendering (collapsed sidebar rail): avatar only, desktop only
+   so the mobile drawer always shows the full control */
+@media (min-width: 1024px) {
+  .profile-menu.compact .profile-button {
+    justify-content: center;
+    padding: var(--space-2);
+  }
+  .profile-menu.compact .profile-name,
+  .profile-menu.compact .chevron {
+    display: none;
+  }
 }
 
 .avatar {
@@ -155,12 +189,17 @@ const handleLogout = () => {
 .profile-name {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #0f172a;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .chevron {
-  color: #64748b;
+  color: var(--color-text-muted);
   transition: transform 0.2s ease;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .chevron-open {
@@ -169,15 +208,22 @@ const handleLogout = () => {
 
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.5rem);
+  top: calc(100% + var(--space-2));
   right: 0;
   min-width: 280px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  z-index: 500;
   overflow: hidden;
+}
+
+.dropdown-menu.placement-top-start {
+  top: auto;
+  bottom: calc(100% + var(--space-2));
+  left: 0;
+  right: auto;
 }
 
 .dropdown-header {
