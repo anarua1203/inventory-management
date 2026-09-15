@@ -6,8 +6,15 @@ export default {
     orders: '注文',
     finance: '財務',
     demandForecast: '需要予測',
+    restocking: '補充発注',
+    reports: 'レポート',
     companyName: '触媒コンポーネンツ',
-    subtitle: '在庫管理システム'
+    subtitle: '在庫管理システム',
+    collapseSidebar: 'サイドバーを折りたたむ',
+    expandSidebar: 'サイドバーを展開する',
+    openMenu: 'メニューを開く',
+    closeMenu: 'メニューを閉じる',
+    skipToContent: 'コンテンツへスキップ'
   },
 
   // Dashboard
@@ -112,6 +119,9 @@ export default {
     onTimeDelivery: '定時配達',
     itemsCount: '{count}件',
     quantity: '数量',
+    submittedOrders: '発注済みの注文',
+    noSubmittedOrders: 'まだ補充発注はありません。',
+    submittedNote: '発注済みの補充注文には上記のフィルターは適用されません。',
     table: {
       orderNumber: '注文番号',
       orderId: '注文ID',
@@ -125,7 +135,8 @@ export default {
       totalValue: '合計金額',
       status: 'ステータス',
       expectedDelivery: '予定配達日',
-      actualDelivery: '実際の配達日'
+      actualDelivery: '実際の配達日',
+      leadTime: 'リードタイム'
     }
   },
 
@@ -188,6 +199,38 @@ export default {
     }
   },
 
+  // Restocking
+  restocking: {
+    title: '補充発注',
+    description: '予算に基づいた補充提案を生成し、発注を行います',
+    budget: '予算',
+    budgetHint: 'ドラッグして予算を設定し、離すと提案を取得します',
+    recommendedTotal: '推奨合計',
+    remainingBudget: '残り予算',
+    coverage: 'カバー率',
+    recommendations: '推奨品目',
+    noItemsFit: 'この予算内に収まる品目がありません。予算を増やしてください。',
+    partial: '一部のみ',
+    warehouse: '倉庫',
+    leadTime: 'リードタイム: {days}日',
+    leadTimeDays: '{days}日',
+    placeOrder: '発注する',
+    placing: '発注中...',
+    orderPlaced: '注文{orderNumber}が発注されました',
+    expectedDelivery: '予定配達日',
+    viewOrders: '注文一覧を見る',
+    orderFailed: '発注に失敗しました',
+    table: {
+      sku: 'SKU',
+      itemName: '品目名',
+      trend: 'トレンド',
+      unitCost: '単価',
+      neededQty: '必要数量',
+      recommendedQty: '推奨数量',
+      lineTotal: '小計'
+    }
+  },
+
   // Filters
   filters: {
     timePeriod: '期間',
@@ -206,7 +249,8 @@ export default {
     backordered: 'バックオーダー',
     inStock: '在庫あり',
     lowStock: '在庫僅少',
-    adequate: '適量'
+    adequate: '適量',
+    submitted: '発注済み'
   },
 
   // Trends
